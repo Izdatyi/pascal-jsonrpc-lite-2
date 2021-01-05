@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A736AA3F-0194-4B4B-9313-FE5233348079}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="projects\testjsonrpclite.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="examples\customerrors\testcustomerrors.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="testjsonrpclite">
+        <MSBuild Projects="projects\testjsonrpclite.dproj"/>
+    </Target>
+    <Target Name="testjsonrpclite:Clean">
+        <MSBuild Projects="projects\testjsonrpclite.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="testjsonrpclite:Make">
+        <MSBuild Projects="projects\testjsonrpclite.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="testcustomerrors">
+        <MSBuild Projects="examples\customerrors\testcustomerrors.dproj"/>
+    </Target>
+    <Target Name="testcustomerrors:Clean">
+        <MSBuild Projects="examples\customerrors\testcustomerrors.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="testcustomerrors:Make">
+        <MSBuild Projects="examples\customerrors\testcustomerrors.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="testjsonrpclite;testcustomerrors"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="testjsonrpclite:Clean;testcustomerrors:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="testjsonrpclite:Make;testcustomerrors:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
